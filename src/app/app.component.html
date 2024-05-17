@@ -1,0 +1,25 @@
+
+
+<main class="main">
+  <div *ngIf="starships.length > 0">
+    <h1>Star Wars Starships</h1>
+    <ul>
+      <li *ngFor="let starship of starships" (click)="selectStarship(starship)" [class.selected]="starship === selectedStarship">
+        <h2>{{ starship.name }}</h2>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="starships.length === 0">
+    <p>Loading starships...</p>
+  </div>
+  
+  <div *ngIf="selectedStarship">
+    <h2>Films featuring {{ selectedStarship.name }}</h2>
+    <button (click)="clearSelection()">Back to list</button>
+    <ul>
+      <li *ngFor="let film of films">
+        <strong>{{ film.title }}</strong> - Released: {{ film.release_date }}
+      </li>
+    </ul>
+  </div>  
+</main>
