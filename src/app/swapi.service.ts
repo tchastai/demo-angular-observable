@@ -9,8 +9,6 @@ import { Film } from './film.model';
   providedIn: 'root'
 })
 export class SwapiService {
-
-  public starshipsObserver : BehaviorSubject<Startship[]> = new BehaviorSubject<Startship[]>([]);
   
   private starshipUrl: string = "https://swapi.dev/api/starships/";
 
@@ -19,18 +17,10 @@ export class SwapiService {
   }
 
   private getAllStarships() {
-    this.httpClient.get<StartshipList>(this.starshipUrl)
-      .subscribe(response => {
-        if(response.results) {
-          this.starshipsObserver.next(response.results);
-        }
-      }, error => {
-        console.error('Error fetching starships', error);
-      });
+
   }
 
   public getFilmDetails(urls: string[]): Observable<Film[]> {
-    const requests = urls.map(url => this.httpClient.get(url));
-    return forkJoin(requests);
+
   }
 }
